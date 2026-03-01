@@ -31,6 +31,11 @@
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-badge { background: var(--green); color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; }
+  .logo-row { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .logo-row-label { color: var(--muted); font-size: 0.75rem; white-space: nowrap; }
+  .logo-img { height: 28px; width: auto; object-fit: contain; filter: grayscale(100%) brightness(1.8); opacity: 0.7; transition: all 0.2s; }
+  .logo-img:hover { filter: grayscale(0%); opacity: 1; }
+  .logo-divider { width: 1px; height: 20px; background: var(--border); }
   .hero {
     min-height: 100vh; display: flex; align-items: center;
     padding: 6rem 2rem 2rem;
@@ -146,6 +151,13 @@
         <a href="#projects" class="btn btn-primary">View Projects</a>
         <a href="#contact" class="btn btn-outline">Get In Touch</a>
         <a href="https://www.linkedin.com/in/sakshi-aade/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      </div>
+      <div class="logo-row">
+        <span class="logo-row-label">Experience &amp; Education</span>
+        <div class="logo-divider"></div>
+        <img src="https://1000logos.net/wp-content/uploads/2017/11/Fidelity-Logo.jpg" alt="Fidelity Investments" class="logo-img" />
+        <div class="logo-divider"></div>
+        <img src="https://nustbrand.wpengine.com/wp-content/uploads/2022/06/ac-grid-5-black.svg" alt="Northeastern University" class="logo-img" style="height:22px;" />
       </div>
     </div>
     <div class="stats-grid">
