@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakshi Aade — Data Scientist & Analyst</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0e1a;
+    --card: #111827;
+    --border: #1f2937;
+    --accent: #6366f1;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --green: #10b981;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,14,26,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem;
+  }
+  .logo { font-size: 1.2rem; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-badge { background: var(--green); color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 6rem 2rem 2rem;
+    background: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.06) 0%, transparent 50%);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: var(--accent); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; margin-bottom: 1.5rem; }
+  .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+  h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-sub { color: var(--muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { padding: 0.75rem 1.75rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STATS CARD */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .stat-num { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-label { color: var(--muted); font-size: 0.8rem; margin-top: 0.25rem; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-tag { color: var(--accent); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  h2 { font-size: 2.2rem; font-weight: 800; }
+  h2 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text { color: var(--muted); line-height: 1.8; font-size: 1rem; }
+  .about-text p { margin-bottom: 1rem; }
+  .about-text strong { color: var(--text); }
+  .cert-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: var(--accent3); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; margin-top: 1rem; text-decoration: none; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; position: relative; overflow: hidden; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(99,102,241,0.1); }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .card-purple::before { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+  .card-cyan::before { background: linear-gradient(90deg, #06b6d4, #0891b2); }
+  .card-amber::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
+  .card-green::before { background: linear-gradient(90deg, #10b981, #059669); }
+  .project-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+  .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-desc { color: var(--muted); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.25rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .tag { background: rgba(99,102,241,0.1); color: var(--accent); font-size: 0.72rem; padding: 0.25rem 0.6rem; border-radius: 4px; }
+  .tag-cyan { background: rgba(6,182,212,0.1); color: var(--accent2); }
+  .tag-amber { background: rgba(245,158,11,0.1); color: var(--accent3); }
+  .tag-green { background: rgba(16,185,129,0.1); color: var(--green); }
+  .project-links { display: flex; gap: 0.75rem; }
+  .project-link { color: var(--muted); font-size: 0.8rem; text-decoration: none; display: flex; align-items: center; gap: 0.3rem; transition: color 0.2s; }
+  .project-link:hover { color: var(--accent); }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-dot { position: absolute; left: -2.4rem; top: 0.3rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+  .timeline-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s; }
+  .timeline-card:hover { border-color: var(--accent); }
+  .exp-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-title { font-weight: 700; font-size: 1rem; }
+  .exp-period { color: var(--accent); font-size: 0.8rem; background: rgba(99,102,241,0.1); padding: 0.2rem 0.6rem; border-radius: 4px; }
+  .exp-company { color: var(--accent2); font-size: 0.875rem; margin-bottom: 1rem; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li { color: var(--muted); font-size: 0.875rem; line-height: 1.6; margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .skill-card-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 1rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .pill { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--muted); font-size: 0.78rem; padding: 0.3rem 0.7rem; border-radius: 6px; transition: all 0.2s; }
+  .pill:hover { border-color: var(--accent); color: var(--text); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-text { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all 0.2s; }
+  .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .contact-label { font-size: 0.75rem; color: var(--muted); }
+  .contact-val { font-size: 0.9rem; font-weight: 600; }
+  .open-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green); padding: 0.75rem 1.25rem; border-radius: 10px; font-size: 0.9rem; font-weight: 600; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+  @media(max-width: 768px) {
+    .hero-inner, .about-grid, .projects-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.2rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Sakshi Aade</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="nav-badge">Open to Work</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span class="dot"></span> Available for Full-Time Roles</div>
+      <h1>Data Scientist<br>&amp; <span>Analyst</span></h1>
+      <p class="hero-sub">I turn complex data into decisions that move the business — through rigorous experimentation, predictive modeling, and GenAI-powered analytics.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        <a href="https://www.linkedin.com/in/sakshi-aade/" target="_blank" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">126M+</div>
+        <div class="stat-label">Customer Records Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$76M</div>
+        <div class="stat-label">Business Impact at Fidelity</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">End-to-End Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Industry Experience</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// About Me</div>
+    <h2>Close to the <span>Business</span></h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <div class="about-text">
+        <p>I'm a Data Scientist and Analyst with a focus on <strong>product analytics, A/B experimentation, and machine learning</strong> — with a strong preference for staying close to the business rather than working in isolation.</p>
+        <p>At <strong>Fidelity Investments</strong>, I worked with 126M+ customer records, running A/B tests, building predictive models, and developing dashboards that directly influenced marketing strategy.</p>
+        <p>I hold an <strong>MS in Information Systems (Data Analytics)</strong> from Northeastern University, and I'm NVIDIA-certified in Generative AI with hands-on RAG pipeline and LLM integration experience.</p>
+        <p>Currently seeking full-time <strong>Data Analyst and Data Scientist</strong> roles where I can blend technical rigor with business impact.</p>
+      </div>
+      <a href="https://www.credly.com/badges/ab2298c0-bf99-41d3-b6fb-f3fb92078612" target="_blank" class="cert-badge">🏅 NVIDIA Certified — Generative AI LLMs ↗</a>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:1fr;">
+      <div class="stat-card">
+        <div style="color:var(--accent);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;">Education</div>
+        <div style="font-weight:700;margin-bottom:0.25rem;">MS Information Systems</div>
+        <div style="color:var(--accent2);font-size:0.85rem;margin-bottom:0.25rem;">Concentration: Data Analytics</div>
+        <div style="color:var(--muted);font-size:0.8rem;">Northeastern University · 2023–2025</div>
+      </div>
+      <div class="stat-card" style="margin-top:1rem;">
+        <div style="color:var(--accent);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;">Based In</div>
+        <div style="font-weight:700;">Boston, MA</div>
+        <div style="color:var(--muted);font-size:0.8rem;margin-top:0.25rem;">Open to remote & hybrid roles nationwide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+  <div class="section-header">
+    <div class="section-tag">// Featured Work</div>
+    <h2>End-to-End <span>Projects</span></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card card-purple">
+      <div class="project-icon">📊</div>
+      <div class="project-title">Social Engagement Intelligence Platform</div>
+      <div class="project-desc">Meta-style product analytics system simulating a feed algorithm A/B test across 50K users. Includes power analysis, novelty effect checks, multiple testing correction, XGBoost churn prediction, BERTopic NLP, and a business impact estimator.</div>
+      <div class="tags">
+        <span class="tag">A/B Testing</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">SHAP</span>
+        <span class="tag">BERTopic</span>
+        <span class="tag">Claude API</span>
+        <span class="tag">Streamlit</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/sakshiraade/social-engagement-intelligence" target="_blank" class="project-link">⬡ GitHub</a>
+        <a href="#" class="project-link">↗ Live Dashboard</a>
+      </div>
+    </div>
+
+    <div class="project-card card-cyan">
+      <div class="project-icon">🔍</div>
+      <div class="project-title">Credit Card Fraud Detection Platform</div>
+      <div class="project-desc">End-to-end fraud detection on 284K real transactions. SQL data warehouse with window functions, velocity feature engineering, 3-model comparison (LR vs XGBoost vs PyTorch Neural Network), and Claude API for AI-generated compliance risk narratives.</div>
+      <div class="tags">
+        <span class="tag tag-cyan">PyTorch</span>
+        <span class="tag tag-cyan">XGBoost</span>
+        <span class="tag tag-cyan">SQLite</span>
+        <span class="tag tag-cyan">SHAP</span>
+        <span class="tag tag-cyan">Claude API</span>
+        <span class="tag tag-cyan">Streamlit</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/sakshiraade/fraud-detection-intelligence" target="_blank" class="project-link">⬡ GitHub</a>
+        <a href="#" class="project-link">↗ Live Dashboard</a>
+      </div>
+    </div>
+
+    <div class="project-card card-amber">
+      <div class="project-icon">🧠</div>
+      <div class="project-title">TED AI Curator — Multi-Agent System</div>
+      <div class="project-desc">Multi-agent AI system for TED Talk discovery built on LangGraph with Snowflake Cortex. Features semantic vector search, AI safety guardrails, playlist generation, talk comparison, and grounded Q&A powered by a RAG pipeline.</div>
+      <div class="tags">
+        <span class="tag tag-amber">Snowflake</span>
+        <span class="tag tag-amber">LangGraph</span>
+        <span class="tag tag-amber">dbt</span>
+        <span class="tag tag-amber">Airflow</span>
+        <span class="tag tag-amber">RAG</span>
+        <span class="tag tag-amber">Streamlit</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/sakshiraade/TED_Agent_AI" target="_blank" class="project-link">⬡ GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card card-green">
+      <div class="project-icon">🍽️</div>
+      <div class="project-title">Food Inspection Data Warehouse</div>
+      <div class="project-desc">End-to-end data warehousing on Chicago and Dallas food inspection data. Built Star Schema dimensional model with SCD Type 2, Talend ETL pipeline integrating multiple sources, and real-time Power BI and Tableau dashboards.</div>
+      <div class="tags">
+        <span class="tag tag-green">Talend ETL</span>
+        <span class="tag tag-green">SQL Server</span>
+        <span class="tag tag-green">Power BI</span>
+        <span class="tag tag-green">Tableau</span>
+        <span class="tag tag-green">Alteryx</span>
+        <span class="tag tag-green">ER Studio</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/sakshiraade/Food_Inspection_Analysis" target="_blank" class="project-link">⬡ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <div class="section-tag">// Work History</div>
+    <h2>Industry <span>Experience</span></h2>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="exp-header">
+          <div class="exp-title">Data Analyst — Co-op</div>
+          <div class="exp-period">Jan 2025 – Jul 2025</div>
+        </div>
+        <div class="exp-company">Fidelity Investments · Boston, MA</div>
+        <ul class="exp-bullets">
+          <li>Built Tableau dashboards tracking marketing KPIs across 126M+ customer records, enabling $76M in business optimization</li>
+          <li>Designed and analyzed A/B tests on digital campaigns, improving conversion rates by 42% through statistically rigorous experiment design</li>
+          <li>Developed audience segmentation models using Python and SQL on Snowflake, identifying high-value customer cohorts</li>
+          <li>Partnered with cross-functional stakeholders in marketing, engineering, and finance to translate findings into business decisions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="exp-header">
+          <div class="exp-title">Data Analyst</div>
+          <div class="exp-period">Aug 2024 – Dec 2024</div>
+        </div>
+        <div class="exp-company">IST Management Services · Boston, MA</div>
+        <ul class="exp-bullets">
+          <li>Created Power BI dashboards tracking operational KPIs, reducing manual reporting time significantly</li>
+          <li>Wrote complex SQL queries to extract, transform, and analyze data from multiple source systems</li>
+          <li>Partnered with operations teams to identify process inefficiencies and quantify improvement opportunities</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="exp-header">
+          <div class="exp-title">Data Analyst</div>
+          <div class="exp-period">Aug 2022 – Aug 2023</div>
+        </div>
+        <div class="exp-company">Springflex Technologies · Pune, India</div>
+        <ul class="exp-bullets">
+          <li>Built financial models and automated reporting pipelines reducing manual effort</li>
+          <li>Developed data visualizations to support client-facing business reviews</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <div class="section-tag">// Tech Stack</div>
+    <h2>Skills &amp; <span>Tools</span></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">Languages</div>
+      <div class="skill-pills">
+        <span class="pill">Python</span><span class="pill">SQL</span><span class="pill">R</span><span class="pill">PySpark</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">ML & AI</div>
+      <div class="skill-pills">
+        <span class="pill">Scikit-learn</span><span class="pill">XGBoost</span><span class="pill">PyTorch</span><span class="pill">HuggingFace</span><span class="pill">SHAP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">GenAI & LLMs</div>
+      <div class="skill-pills">
+        <span class="pill">RAG</span><span class="pill">LangChain</span><span class="pill">LangGraph</span><span class="pill">Claude API</span><span class="pill">BERTopic</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Visualization</div>
+      <div class="skill-pills">
+        <span class="pill">Tableau</span><span class="pill">Power BI</span><span class="pill">Streamlit</span><span class="pill">Plotly</span><span class="pill">Looker Studio</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Cloud & Databases</div>
+      <div class="skill-pills">
+        <span class="pill">Snowflake</span><span class="pill">BigQuery</span><span class="pill">PostgreSQL</span><span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">Pinecone</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Data Engineering</div>
+      <div class="skill-pills">
+        <span class="pill">Airflow</span><span class="pill">Kafka</span><span class="pill">dbt</span><span class="pill">Docker</span><span class="pill">FastAPI</span><span class="pill">Talend</span>
+      </div>
+    </div>
+    <div class="skill-card" style="grid-column: span 3;">
+      <div class="skill-card-title">Analytics Skills</div>
+      <div class="skill-pills">
+        <span class="pill">A/B Testing</span><span class="pill">Statistical Modeling</span><span class="pill">Marketing Mix Modeling</span><span class="pill">Audience Segmentation</span><span class="pill">Data Warehousing</span><span class="pill">Dimensional Modeling</span><span class="pill">ETL</span><span class="pill">Business Intelligence</span><span class="pill">Data Visualization</span><span class="pill">Behavioral Analytics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">// Get In Touch</div>
+    <h2>Let's <span>Connect</span></h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-text">I'm actively looking for full-time Data Analyst and Data Scientist roles. If you're working on interesting problems with data, I'd love to connect.</p>
+      <div class="open-badge"><span class="dot"></span> Open to Full-Time Opportunities</div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:sakshiaade03@gmail.com" class="contact-link">
+        <div class="contact-icon" style="background:rgba(99,102,241,0.1);">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">sakshiaade03@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/sakshi-aade/" target="_blank" class="contact-link">
+        <div class="contact-icon" style="background:rgba(6,182,212,0.1);">💼</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-val">linkedin.com/in/sakshi-aade</div>
+        </div>
+      </a>
+      <a href="https://github.com/sakshiraade" target="_blank" class="contact-link">
+        <div class="contact-icon" style="background:rgba(16,185,129,0.1);">⬡</div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-val">github.com/sakshiraade</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by Sakshi Aade · Boston, MA · 2025</p>
+</footer>
+
+</body>
+</html>
